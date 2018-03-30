@@ -1,0 +1,49 @@
+<table class="table table-condensed table-striped table-hover">
+
+  <colgroup>
+    <col width="60px">
+    <col>
+    <col width="30px">
+    <col width="30px">
+  </colgroup>
+
+  <thead>
+    <tr>
+
+      <th class="clickable" (click)="orderBy('id')" title="Click to sort">#</th>
+
+      <th class="clickable" (click)="orderBy('description')" title="Click to sort">Description</th>
+
+      <th class="clickable" (click)="orderBy('isComplete')" title="Click to sort">Complete</th>
+
+      <th>Remove</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let todoItem of todoItems | orderBy:orderedBy">
+      <tr *ngIf="!todoItem.isComplete || showCompleted">
+
+        <td>
+          <span class="badge">{{todoItem.id}}</span>
+        </td>
+
+        <td>
+          {{todoItem.description}}
+        </td>
+
+        <td class="text-center">
+          <span class="clickable fa" [class.fa-calendar-check-o]="todoItem.isComplete" [class.fa-calendar-o]="!todoItem.isComplete"
+            (click)="toggleComplete(todoItem)"></span>
+        </td>
+
+        <td class="text-center">
+          <span class="clickable fa fa-trash" (click)="deleteTodoItem(todoItem)"></span>
+        </td>
+
+      </tr>
+    </ng-container>
+  </tbody>
+
+</table>
